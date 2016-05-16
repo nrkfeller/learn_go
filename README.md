@@ -4,21 +4,26 @@ https://github.com/GoesToEleven/GolangTraining
 https://github.com/ardanlabs/gotraining
 
 ### Go paths need to be defined before anything
+
 * export GOPATH=$HOME/work/
 * export GOROOT=/usr/local/go
 * export PATH="$HOME/Documents/work/bin:$PATH"
 
 ### Use atom as a text editor
+
 1. get atom : https://atom.io/
 2. get go-plus plugin : https://github.com/joefitzgerald/go-plus
 * just open atom and hit ctrl-shit-p search for packages to install and get go-plus
 * now you have code completion
 
 ### fmt
+
 1. Formating library, pronounced, fmt - not ef-em-tee
 2. fmt.Println() - variatic function, its smart, you can print different types in one statement without casting
+3. fmt.Scan : needs to point to memory address (not the var). I store my name " fmt.Scan(&myName) "
 
 ### go commands
+
 1. "go build" : build and executable file run it with  ./filename
 2. "go clean" : removes the executable files
 3. "go install" : make program an environment variable, then you can call it anywhere by just writing the filename. places a executable program in you environment bin folder and .a file in your archives
@@ -32,6 +37,7 @@ https://github.com/ardanlabs/gotraining
 4. Unicode : fmt.Printf("%q")
 
 ### Package conventions
+
 Be careful of package idioms! Conventions are strongly enforced
 1. Comment : "Package packagename" before package declaration
 2. Comment : "Functionname" before function declaration -- same for package variables
@@ -39,6 +45,7 @@ Be careful of package idioms! Conventions are strongly enforced
 4. Fully qualified name needed for 3rd party libs
 
 ### Variables
+
 Be idiomatic with go variables. Don't be some kind of space cowboy.
 1. Shorthand notation: a := 1 --- b := "hello world"
 2. Initializes to 0 : var a int --- var b float64
@@ -47,6 +54,7 @@ Be idiomatic with go variables. Don't be some kind of space cowboy.
 5. Multiple initialization "var a,b int 8 = 34,54"
 
 ### Scope
+
 Mostly works like all other languages. but try to keep you scope tight. don't unnecessarily give large scope! obviously...
 In order of restrictiveness.
 1. Universe : good for the whole shebang
@@ -55,7 +63,27 @@ In order of restrictiveness.
 4. Block : within block only
 
 ### Functions
+
 Go supports function clojure superhappyfuntime!
 1. Func Expression : You can declare function in another function scope as "funcname := func() int {func logic}".
 2. Normal Func : You can declare function outside main as "func (x int) funcname() int {func logic}"
 3. Return a Func : you can return a func when declared "func wrapper() func() int {func logic}"
+
+### Http package - "net/http"
+easily do http requests. can easily be go'ed (threaded)
+
+### Constant
+Golang supports constant - functional func func func.
+Can be a kind (which means it just picks the ideal type) or a type that is explicitly defined. this creates some measure of freedom. and slightly less tedious to code.
+1. "const val = 42"
+2. "const ( pi = 3.14 languague = "go")"
+3. iota is a automatic incrementer. kind of like an ID. only takes 8 bits of space!
+4. check with import "unsafe" --- unsafe.Sizeof(const/var)
+
+### Memory Addressing
+go support memory Addressing
+1. var a = 12 - is at address &a - &a is a pointer to an address - \*&a is the content of that address
+2. change values with pointers a := 1 -- var b = &a -- \*b = 3. Now a = 3. This means you only have to more around pointers instead of moving actually data. makes things much faster! "pass by value!"
+3. variable a has address &a can be pointed to \*a and must be passed into function myfunc(a \*int)
+
+###
