@@ -39,6 +39,7 @@ https://github.com/ardanlabs/gotraining
 ### Package conventions
 
 Be careful of package idioms! Conventions are strongly enforced
+
 1. Comment : "Package packagename" before package declaration
 2. Comment : "Functionname" before function declaration -- same for package variables
 3. Capitalized functions/variables from packages!
@@ -47,6 +48,7 @@ Be careful of package idioms! Conventions are strongly enforced
 ### Variables
 
 Be idiomatic with go variables. Don't be some kind of space cowboy.
+
 1. Shorthand notation: a := 1 --- b := "hello world"
 2. Initializes to 0 : var a int --- var b float64
 3. Only use "var a int8 = 4" if you don't want default size
@@ -57,6 +59,7 @@ Be idiomatic with go variables. Don't be some kind of space cowboy.
 
 Mostly works like all other languages. but try to keep you scope tight. don't unnecessarily give large scope! obviously...
 In order of restrictiveness.
+
 1. Universe : good for the whole shebang
 2. Package : scope, withing package called
 3. file : a top of file. this does not support shorthand assignment of variables
@@ -64,10 +67,12 @@ In order of restrictiveness.
 
 ### Functions
 
-Go supports function clojure superhappyfuntime!
+Go supports function clojure superhappyfuntime! Everything in on is pass by value!!
+
 1. Func Expression : You can declare function in another function scope as "funcname := func() int {func logic}".
 2. Normal Func : You can declare function outside main as "func (x int) funcname() int {func logic}"
 3. Return a Func : you can return a func when declared "func wrapper() func() int {func logic}"
+4. Callbacks : function that takes a function as a parameter - similar to a lambda expression (functional methodology - haskell,lisp)
 
 ### Http package - "net/http"
 easily do http requests. can easily be go'ed (threaded)
@@ -75,6 +80,7 @@ easily do http requests. can easily be go'ed (threaded)
 ### Constant
 Golang supports constant - functional func func func.
 Can be a kind (which means it just picks the ideal type) or a type that is explicitly defined. this creates some measure of freedom. and slightly less tedious to code.
+
 1. "const val = 42"
 2. "const ( pi = 3.14 languague = "go")"
 3. iota is a automatic incrementer. kind of like an ID. only takes 8 bits of space!
@@ -82,8 +88,11 @@ Can be a kind (which means it just picks the ideal type) or a type that is expli
 
 ### Memory Addressing
 go support memory Addressing
+
 1. var a = 12 - is at address &a - &a is a pointer to an address - \*&a is the content of that address
 2. change values with pointers a := 1 -- var b = &a -- \*b = 3. Now a = 3. This means you only have to more around pointers instead of moving actually data. makes things much faster! "pass by value!"
 3. variable a has address &a can be pointed to \*a and must be passed into function myfunc(a \*int)
 
-###
+### Statements
+1. Defer : runs command at the end of main function, quite useful for keeping code clean, you can open a file and defer its close right under it.
+2. make : creates slices, maps, channels only. Make creates a reference to a data structure, so when you pass them into a function (actually passing the regerence). they can modify an existing underlying DS
