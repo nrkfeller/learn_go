@@ -96,3 +96,9 @@ go support memory Addressing
 ### Statements
 1. Defer : runs command at the end of main function, quite useful for keeping code clean, you can open a file and defer its close right under it.
 2. make : creates slices, maps, channels only. Make creates a reference to a data structure, so when you pass them into a function (actually passing the regerence). they can modify an existing underlying DS
+
+### Data Structures
+1. Array : numbered sequence - not idiomatic || var myarray [10]int
+2. slice : list descriptor of contiguous segment - initializes to nil, changeable size and its length and capacity can be different || make([]int, 5, 10). Supports append, slice is just a dynamic array. when initialized with no values, the slice is nil, because there is no underlying data structure with attributes (pointer, len, cap).
+3. map : map... dict... wtv you wanna call it || make(map[string]int). map is also a reference type! can be created with composite litteral syntax map[int]int{}.
+4. struct : composite DS type (like a class, but don't say that too loud) || type potato struct{}
