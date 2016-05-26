@@ -102,3 +102,10 @@ go support memory Addressing
 2. slice : list descriptor of contiguous segment - initializes to nil, changeable size and its length and capacity can be different || make([]int, 5, 10). Supports append, slice is just a dynamic array. when initialized with no values, the slice is nil, because there is no underlying data structure with attributes (pointer, len, cap).
 3. map : map... dict... wtv you wanna call it || make(map[string]int). map is also a reference type! can be created with composite litteral syntax map[int]int{}.
 4. struct : sequence of fields with name and type. Composite DS type (like a class, but don't say that too loud) || type potato struct{}. You can also have unnamed fields. Encapsulation (exported/unexported), Re-usability (inheritance), Polymorphism (interfaces), Overriding(promotion). Instead of instantiating we say creating a value of a type! when declaring a struct you can add tags to some fields (for example if you don't want them to be stored)
+
+### Ecoding/Decoding -- Un/Marshalling
+1. Encoding/Decoding : writing and reading into a stream. Typically used for external interaction.  Use json.NewEncoder(io.writer), gives out a pointer to a new \*Encoder. json.NewDecoder(io.reader), gives out pointer to \*Decoder
+2. Marshalling and UnMarshalling : writing and reading from withing an application. use ticks /`/` to create a reader from a string and Unmarshal with the json.Unmarshal command. json.Marshal(type) to marshal type into a []byte
+
+### Interfaces - substitutability/Polymorphism
+1. Functions should match on structs that want to use the same interface
