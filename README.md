@@ -101,4 +101,4 @@ go support memory Addressing
 1. Array : numbered sequence - not idiomatic || var myarray [10]int
 2. slice : list descriptor of contiguous segment - initializes to nil, changeable size and its length and capacity can be different || make([]int, 5, 10). Supports append, slice is just a dynamic array. when initialized with no values, the slice is nil, because there is no underlying data structure with attributes (pointer, len, cap).
 3. map : map... dict... wtv you wanna call it || make(map[string]int). map is also a reference type! can be created with composite litteral syntax map[int]int{}.
-4. struct : composite DS type (like a class, but don't say that too loud) || type potato struct{}
+4. struct : sequence of fields with name and type. Composite DS type (like a class, but don't say that too loud) || type potato struct{}. You can also have unnamed fields. Encapsulation (exported/unexported), Re-usability (inheritance), Polymorphism (interfaces), Overriding(promotion). Instead of instantiating we say creating a value of a type! when declaring a struct you can add tags to some fields (for example if you don't want them to be stored)
