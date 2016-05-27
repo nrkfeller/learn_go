@@ -1,4 +1,5 @@
 # Learn Go
+** Don't communicate by sharing memory; instead, share memory by comunicating **
 
 https://github.com/GoesToEleven/GolangTraining
 https://github.com/ardanlabs/gotraining
@@ -44,6 +45,8 @@ Be careful of package idioms! Conventions are strongly enforced
 2. Comment : "Functionname" before function declaration -- same for package variables
 3. Capitalized functions/variables from packages!
 4. Fully qualified name needed for 3rd party libs
+5. If you want to export types or their attricutes, capitalize what is to be exported
+6. func init(){}. runs before anything on that file or program
 
 ### Variables
 
@@ -113,3 +116,15 @@ go support memory Addressing
 3.  When interface methods are called. the equivalent method from that specific type is instead evoked. This is polymorphism in action.
 4. Implementation are satisfied implicitly! as long as the types has identical called and returned methods.
 5. Remember concrete types have typed and values.
+6. Sorting from the standard lib works through interfaces that can be over written, it all happens in place through the references.
+7. Empty interface : all types implement the empty interface, you can place anything into a slice on empty interface but this may cause problems when unpacking different types that cannot all be treated the same
+8. Assertion : You cannot cast interfaces, you need to assert the instead. type potato interface{} = "foobar" -- potato.(string)
+
+### Concurrency
+1. WaitGroup : var wg sync.WaitGroup. Acts like a semaphore. essentially available resources can be incremented and decremented!
+2. GOMAXPROCS : above go version 1.5. Your go routines default to using all the core. You no longer need to specify it.
+3. Mutex : var m sync.Mutex. m.Lock() m.Unlock(). Behavior is as expect. Like in all other languages
+4. Atomicity : atomic.AddInt64(&counter, 1). Only one process can access this single value at the time. Like in all other languages.
+5. Channels : channels are a way to pass information. channels can have information passed to them and removed from them using this operator <-. Passing information in a channel does not prevent functions or programs from exiting, this must be done explicitly.
+* close(type channel) : prevents the program from putting new information into the channel. but can still receive. We need to close otherwise, we cannot iterate through all available data in the channel (ie deadlock will be created).
+* ranging : ranging through a channel allows us to grab all the info off it without the program exiting. however it require the channel to be closed
