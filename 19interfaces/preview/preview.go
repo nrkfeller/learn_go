@@ -27,11 +27,13 @@ type Circle struct {
 	radius float64
 }
 
+// area() float64 - this means it can be called using Shape interface
 func (c Circle) area() float64 {
 	return c.radius * c.radius * 3.1415
 }
 
 // square has a function that returns its area
+// area() float64 - this means it can be called using Shape interface
 func (s Square) area() float64 {
 	return math.Pow(s.side, 2)
 }

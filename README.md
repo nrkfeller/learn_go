@@ -108,4 +108,8 @@ go support memory Addressing
 2. Marshalling and UnMarshalling : writing and reading from withing an application. use ticks /`/` to create a reader from a string and Unmarshal with the json.Unmarshal command. json.Marshal(type) to marshal type into a []byte
 
 ### Interfaces - substitutability/Polymorphism
-1. Functions should match on structs that want to use the same interface
+1. Interface are abstract types. Functions should match on structs that want to use the same interface.
+2. Polymorphism allows code to have different behavior through the implementation of types. Interfaces are types that declare behavior, the behavior is however not implemented/used by the interface but by the types that use that interface.
+3.  When interface methods are called. the equivalent method from that specific type is instead evoked. This is polymorphism in action.
+4. Implementation are satisfied implicitly! as long as the types has identical called and returned methods.
+5. Remember concrete types have typed and values.
