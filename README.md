@@ -128,3 +128,17 @@ go support memory Addressing
 5. Channels : channels are a way to pass information. channels can have information passed to them and removed from them using this operator <-. Passing information in a channel does not prevent functions or programs from exiting, this must be done explicitly.
 * close(type channel) : prevents the program from putting new information into the channel. but can still receive. We need to close otherwise, we cannot iterate through all available data in the channel (ie deadlock will be created).
 * ranging : ranging through a channel allows us to grab all the info off it without the program exiting. however it require the channel to be closed
+
+### Channels
+* Channels are a conduit which you can send and receive values with. c := make(chan int) || can be of any type.
+* <- arrow is optional and shows the direction of the flow of data (bi-directional, send-only, receive-only). Bi-directional if omitted.
+
+### Pipelining
+A series of stages connected by channels. Each stage is a group of goroutines.
+1. receive values from upstream via an inbound channel. essentially a bunch of instructions and values
+2. Perform the work, compute the instructions on the values
+3. Send the work downstream via outbound channels
+use gen() to create the data and instructions. the a second descriptive function that distributes the work.
+
+### Fanning in/out
+Fan out is the process by which work is distributed to slaves to do the computation. Fan in it the process by which the work done by slaves is being consolidates back into a single channel.
