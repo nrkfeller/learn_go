@@ -20,6 +20,7 @@ func main() {
 	}
 }
 
+// Takes numbers and pushes them onto a channel
 func gen(nums ...int) chan int {
 	fmt.Printf("TYPE OF NUMS %T\n", nums) // just FYI
 
@@ -33,6 +34,7 @@ func gen(nums ...int) chan int {
 	return out
 }
 
+// this is the computation whatever it is
 func sq(in chan int) chan int {
 	out := make(chan int)
 	go func() {
@@ -44,6 +46,8 @@ func sq(in chan int) chan int {
 	return out
 }
 
+// takes in a variadic slice of channels and pushed them into one channel
+// essentially consolidating the computed results
 func merge(cs ...chan int) chan int {
 	fmt.Printf("TYPE OF CS: %T\n", cs) // just FYI
 
@@ -51,13 +55,15 @@ func merge(cs ...chan int) chan int {
 	var wg sync.WaitGroup
 	wg.Add(len(cs))
 
+	// get each channel
 	for _, c := range cs {
+		// get each value (in each channel)
 		go func(ch chan int) {
 			for n := range ch {
 				out <- n
 			}
 			wg.Done()
-		}(c)
+		}(c) // takes in a channel!
 	}
 
 	go func() {
