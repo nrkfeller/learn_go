@@ -12,7 +12,7 @@ func main() {
 	// FAN OUT
 	// Multiple functions reading from the same channel until that channel is closed
 	// Distribute work across multiple functions (ten goroutines) that all read from in.
-	xc := fanOut(in, 10)
+	xc := fanOut(in, 1000000)
 
 	// FAN IN
 	// multiplex multiple channels onto a single channel

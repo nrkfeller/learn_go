@@ -17,7 +17,7 @@ func gen(nums ...int) chan int {
 	out := make(chan int)
 	go func() {
 		for _, n := range nums {
-			out <= n
+			out <- n
 		}
 		close(out)
 	}()

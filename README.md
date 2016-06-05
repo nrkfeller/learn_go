@@ -142,3 +142,11 @@ use gen() to create the data and instructions. the a second descriptive function
 
 ### Fanning in/out
 Fan out is the process by which work is distributed to slaves to do the computation. Fan in it the process by which the work done by slaves is being consolidates back into a single channel.
+
+### Errors
+Error values in Go are like any other value, you are not restricted by error attributes. You can deal with it with the entire language at your disposal!
+1. Fatal : Prints the error and exit status
+2. Panic : Prints more stack trace information and exit status
+3. Log : You can create a log file and store all the log info and error info. (this is seemly quite nice way to deal with errors)
+4. Print Fail : You do a standard print of error
+* You production code needs to handle errorsss!!!
