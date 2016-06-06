@@ -86,6 +86,7 @@ func main() {
 		if err != nil {
 			log.Fatalln(err)
 		}
+		// our big problem, only one connection at a time!
 		handle(conn)
 	}
 }

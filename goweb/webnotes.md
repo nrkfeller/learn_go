@@ -40,6 +40,22 @@ Its like an ongoing conversation - the client does not need to solicit the servi
 ### package strings
 Alot of the stuff that is passed between connections if just UTF-8 encoded strings. So we need to play with this stuff a lot!
 
+### atomic and mutex
+atomic and mutex. mutex is just an atomic boolean in typical implementation. only the processor can access a variable.
+
+### HTTP
+Protocol on top of TCP. Servers receive requests(Request line / headers)and send back responses (status line/ headers / content). Verbs (GET, POST, PUT, DELETE, HEAD(GET but no body, could be useful for video)). PUT vs POST, create and update, but they are similar POST when url unknown, PUT when known.
+HTTP server just parses requests and sends a response
+
+### ResponseWriter
+Interface for http package
+1. Header() - returns the header map that will be sent by write header
+2. Write([]byte) (int, error) - writes to the connection as part of the http reply
+3. WriteHeader(int) - Sends http response with a status code.
+
+### Restful Web Applications
+* ServeMux - server multiplexer, route signals based on conditions
+* 
 
 * * *
 28
