@@ -54,8 +54,19 @@ Interface for http package
 3. WriteHeader(int) - Sends http response with a status code.
 
 ### Restful Web Applications
+Web software architecture style for convenience when it comes to scalability of dynamic services. uses HTTP verbs to do build upon simple concepts. URL should be pretty/logical/meaningful
 * ServeMux - server multiplexer, route signals based on conditions
-* 
+* Julien Schmidt httprouter beats all the benchamarks, even servemux
+* Restful API dont need SDKs!!
+
+### Serving pictures
+When you want to serve pictures on a http server
+1. os.Open - io.Copy(res, myfile) - long kind of dumb way
+2. http.ServeContent(res, req, f.Name(), fi.ModTime(), f) - Good way can give you diff time and some other useful stuff
+3. http.ServeFile(res,req,"picname,jpg") - very convenient no hasle, directly chooses files
+4. http.Handle("/", http.FileServer(http.Dir("."))) -  serves up all the files in the directory, all ready for embedding!
+
+
 
 * * *
 28
