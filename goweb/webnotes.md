@@ -66,6 +66,10 @@ When you want to serve pictures on a http server
 3. http.ServeFile(res,req,"picname,jpg") - very convenient no hasle, directly chooses files
 4. http.Handle("/", http.FileServer(http.Dir("."))) -  serves up all the files in the directory, all ready for embedding!
 
+### Templates
+* Embedding in html {{ stuff }}
+* 
+
 
 
 * * *
