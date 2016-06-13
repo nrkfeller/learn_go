@@ -30,6 +30,7 @@ https://github.com/ardanlabs/gotraining
 3. "go install" : make program an environment variable, then you can call it anywhere by just writing the filename. places a executable program in you environment bin folder and .a file in your archives
 4. "go get" :  get new packages [-d] [-f] [-fix] [-insecure] [-t] [-u] package-name
 5. "go run" : looks for a main run executable
+6. os.Args : whatever is passed after go run xxx.go becomes an os.Args, when not arguments are given os.Args has length 1
 
 ### Encoding https://godoc.org/fmt
 1. Binary : fmt.Printf("%b")
@@ -70,12 +71,13 @@ In order of restrictiveness.
 
 ### Functions
 
-Go supports function clojure superhappyfuntime! Everything in on is pass by value!!
+Functions are first class types. Go supports function clojure superhappyfuntime! Everything in on is pass by value!!
 
 1. Func Expression : You can declare function in another function scope as "funcname := func() int {func logic}".
 2. Normal Func : You can declare function outside main as "func (x int) funcname() int {func logic}"
 3. Return a Func : you can return a func when declared "func wrapper() func() int {func logic}"
 4. Callbacks : function that takes a function as a parameter - similar to a lambda expression (functional methodology - haskell,lisp)
+5. Functions can be declared as types -- type Add func(a int, b int) int
 
 ### Http package - "net/http"
 easily do http requests. can easily be go'ed (threaded)
@@ -111,14 +113,21 @@ go support memory Addressing
 2. Marshalling and UnMarshalling : writing and reading from withing an application. use ticks /`/` to create a reader from a string and Unmarshal with the json.Unmarshal command. json.Marshal(type) to marshal type into a []byte
 
 ### Interfaces - substitutability/Polymorphism
-1. Interface are abstract types. Functions should match on structs that want to use the same interface.
+GO does not have inheritance, so it does not have an object superclass. Instead an empty interfaces with no methods implicitly implements all possible objects.
+1. Interface are abstract types. Functions should match on structs that want to use the same interface. They define a contract, not an implementation
 2. Polymorphism allows code to have different behavior through the implementation of types. Interfaces are types that declare behavior, the behavior is however not implemented/used by the interface but by the types that use that interface.
-3.  When interface methods are called. the equivalent method from that specific type is instead evoked. This is polymorphism in action.
+3. When interface methods are called. the equivalent method from that specific type is instead evoked. This is polymorphism in action.
 4. Implementation are satisfied implicitly! as long as the types has identical called and returned methods.
 5. Remember concrete types have typed and values.
 6. Sorting from the standard lib works through interfaces that can be over written, it all happens in place through the references.
-7. Empty interface : all types implement the empty interface, you can place anything into a slice on empty interface but this may cause problems when unpacking different types that cannot all be treated the same
+7. Empty interface : all types implement the empty interface, you can place anything into a slice on empty interface but this may cause problems when unpacking different types that cannot all be treated the same.
 8. Assertion : You cannot cast interfaces, you need to assert the instead. type potato interface{} = "foobar" -- potato.(string)
+
+### Packages
+* Cyclical Dependencies :  the compiler will not allow A to import B and B to import A
+* Visibility : Capital letters can be exported otherwise no - linting takes care of this
+* Dependency Management : Our won src code becomes a sort of Gemfile or package.json - godep helps you manage this
+*
 
 ### Concurrency
 1. WaitGroup : var wg sync.WaitGroup. Acts like a semaphore. essentially available resources can be incremented and decremented!
@@ -128,6 +137,10 @@ go support memory Addressing
 5. Channels : channels are a way to pass information. channels can have information passed to them and removed from them using this operator <-. Passing information in a channel does not prevent functions or programs from exiting, this must be done explicitly.
 * close(type channel) : prevents the program from putting new information into the channel. but can still receive. We need to close otherwise, we cannot iterate through all available data in the channel (ie deadlock will be created).
 * ranging : ranging through a channel allows us to grab all the info off it without the program exiting. however it require the channel to be closed
+
+### switch
+Just like in any other language switch allows you to field some options
+* one powerful use of switch is obj.(type) - case int case string ... - this (type) can only be used in a switch statement
 
 ### Channels
 * Channels are a conduit which you can send and receive values with. c := make(chan int) || can be of any type.
@@ -146,7 +159,8 @@ Fan out is the process by which work is distributed to slaves to do the computat
 ### Errors
 Error values in Go are like any other value, you are not restricted by error attributes. You can deal with it with the entire language at your disposal!
 1. Fatal : Prints the error and exit status
-2. Panic : Prints more stack trace information and exit status
+2. Panic : Prints more stack trace information and exit status -- panic and recover is like a try catch
 3. Log : You can create a log file and store all the log info and error info. (this is seemly quite nice way to deal with errors)
 4. Print Fail : You do a standard print of error
+5. Creating new types of errors : type error interface{ Error() string }
 * You production code needs to handle errorsss!!!

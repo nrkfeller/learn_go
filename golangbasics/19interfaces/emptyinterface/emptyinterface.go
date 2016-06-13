@@ -18,6 +18,7 @@ func main() {
 	// this interfaces for all vehicles!
 	rides := []vehicles{prius, x6, b747, cseries, titanic, rowboat}
 	fmt.Println(rides)
+	fmt.Println("12".(string))
 }
 
 type vehicles interface{}
