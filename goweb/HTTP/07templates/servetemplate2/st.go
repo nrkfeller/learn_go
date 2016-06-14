@@ -4,7 +4,6 @@ import (
 	"html/template"
 	"log"
 	"net/http"
-	"strings"
 )
 
 func main() {
@@ -14,9 +13,9 @@ func main() {
 	}
 
 	// this places the executed file in the default servemux
-	http.HandleFunc("/", func(res http.ResponseWriter, req *http.Request) {
-		fs := strings.Split(req.URL.Path, "/")
-		err = tpl.Execute(res, fs[len(fs)-1])
+	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		fs := r.URL.Path
+		err = tpl.Execute(w, fs)
 		if err != nil {
 			log.Fatalln(err)
 		}

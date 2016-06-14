@@ -84,7 +84,7 @@ easily do http requests. can easily be go'ed (threaded)
 
 ### Constant
 Golang supports constant - functional func func func.
-Can be a kind (which means it just picks the ideal type) or a type that is explicitly defined. this creates some measure of freedom. and slightly less tedious to code.
+Can be a kind (which means it just picks the ideal type) or a type that is explicitly defined. this creates some measure of freedom. and slightly less tedious to code. Constants do not have addresses, because for practical purposes they are just a declaration and not stored anywhere like a variable.
 
 1. "const val = 42"
 2. "const ( pi = 3.14 languague = "go")"
@@ -106,13 +106,14 @@ go support memory Addressing
 1. Array : numbered sequence - not idiomatic || var myarray [10]int
 2. slice : list descriptor of contiguous segment - initializes to nil, changeable size and its length and capacity can be different || make([]int, 5, 10). Supports append, slice is just a dynamic array. when initialized with no values, the slice is nil, because there is no underlying data structure with attributes (pointer, len, cap).
 3. map : map... dict... wtv you wanna call it || make(map[string]int). map is also a reference type! can be created with composite litteral syntax map[int]int{}.
-4. struct : sequence of fields with name and type. Composite DS type (like a class, but don't say that too loud) || type potato struct{}. You can also have unnamed fields. Encapsulation (exported/unexported), Re-usability (inheritance), Polymorphism (interfaces), Overriding(promotion). Instead of instantiating we say creating a value of a type! when declaring a struct you can add tags to some fields (for example if you don't want them to be stored)
+4. struct : sequence of fields with name and type. Composite DS type (like a class, but don't say that too loud) || type potato struct{}. You can also have unnamed fields. Encapsulation (exported Capitalize attributes/unexported smallcase attributes), Re-usability (inheritance), Polymorphism (interfaces), Overriding(promotion). Instead of instantiating we say creating a value of a type! when declaring a struct you can add tags to some fields (for example if you don't want them to be stored)
 
 ### Ecoding/Decoding -- Un/Marshalling
 1. Encoding/Decoding : writing and reading into a stream. Typically used for external interaction.  Use json.NewEncoder(io.writer), gives out a pointer to a new \*Encoder. json.NewDecoder(io.reader), gives out pointer to \*Decoder
 2. Marshalling and UnMarshalling : writing and reading from withing an application. use ticks /`/` to create a reader from a string and Unmarshal with the json.Unmarshal command. json.Marshal(type) to marshal type into a []byte
 
 ### Interfaces - substitutability/Polymorphism
+If a struct (type) implements a function and that function is part of the interface declaration, that type can be cast to that interface or called by that interface.
 GO does not have inheritance, so it does not have an object superclass. Instead an empty interfaces with no methods implicitly implements all possible objects.
 1. Interface are abstract types. Functions should match on structs that want to use the same interface. They define a contract, not an implementation
 2. Polymorphism allows code to have different behavior through the implementation of types. Interfaces are types that declare behavior, the behavior is however not implemented/used by the interface but by the types that use that interface.
