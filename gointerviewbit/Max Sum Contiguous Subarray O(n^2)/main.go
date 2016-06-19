@@ -13,19 +13,38 @@ func main() {
 
 func maxSum(a []int) []int {
 	ans := math.MinInt64
-	var arr []int
-	for startindex := 0; startindex < len(a); startindex++ {
+	var ret []int
+	for startIndex := 0; startIndex < len(a); startIndex++ {
 		sum := 0
-		for subarraysize := 1; subarraysize <= len(a); subarraysize++ {
-			if startindex+subarraysize > len(a) {
+		for endIndex := 1; endIndex < len(a); endIndex++ {
+			if startIndex+endIndex > len(a) {
 				break
 			}
-			sum += a[startindex+subarraysize-1]
+			sum += a[startIndex+endIndex-1]
 			if sum > ans {
 				ans = sum
-				arr = a[startindex : startindex+subarraysize]
+				ret = a[startIndex : startIndex+endIndex]
 			}
 		}
 	}
-	return arr
+	return ret
 }
+
+// func maxSum(a []int) []int {
+// 	ans := math.MinInt64
+// 	var arr []int
+// 	for startindex := 0; startindex < len(a); startindex++ {
+// 		sum := 0
+// 		for subarraysize := 1; subarraysize <= len(a); subarraysize++ {
+// 			if startindex+subarraysize > len(a) {
+// 				break
+// 			}
+// 			sum += a[startindex+subarraysize-1]
+// 			if sum > ans {
+// 				ans = sum
+// 				arr = a[startindex : startindex+subarraysize]
+// 			}
+// 		}
+// 	}
+// 	return arr
+// }

@@ -1,14 +1,7 @@
 package main
 
-import "fmt"
+import "github.com/nrkfeller/isdm"
 
 func main() {
-
-	m := 1236
-
-	fmt.Println(half(m))
-}
-
-func half(n int) (int, bool) {
-	return n / 2, n%2 == 0
+	isdm.GetStats(10000, 6400, 255, 2)
 }
