@@ -4,6 +4,7 @@ package main
 import (
 	"fmt"
 	"sync"
+	"time"
 )
 
 func gen(done <-chan struct{}, nums ...int) <-chan int {
@@ -77,17 +78,25 @@ func main() {
 	defer close(done)
 
 	// Distribute the sq work across two goroutines that both read from in.
-	in := gen(done, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12)
+	var arr []int
+	for i := 0; i < 100000; i++ {
+		arr = append(arr, i)
+	}
+
+	in := gen(done, arr...)
 	var allcs []<-chan int
 
-	for i := 0; i < 10; i++ {
+	start := time.Now()
+	for i := 0; i < 3; i++ {
 		c := sq(done, in)
 		allcs = append(allcs, c)
 
 	}
-
+	total := 0
 	for n := range merge(done, allcs) {
-		fmt.Println(n)
+		//fmt.Println(n)
+		total += n
 	}
+	fmt.Println(time.Since(start), total)
 
 }
