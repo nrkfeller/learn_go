@@ -12,6 +12,10 @@ http://fabric8.io/guide/getStarted/vagrant.html
 * Select Ubuntu (64-bit), Choose tier (free tier works)
 * Create a key pair - call it whatever you want
 * Download the .pem file and place it in your local ~/.ssh/ directory
+* Click Review Instance Lauch
+* Click "Edit security Groups"
+* Click "Add Rule"
+* Select Type-> Custom TCP Rule || Port Range -> 5901 || Source -> Anywhere
 * Click Launch Instance
 * Navigate to your local ~/.ssh/ directory
 * Navigate to "Instances/Instances" in your AWS console
@@ -20,17 +24,32 @@ http://fabric8.io/guide/getStarted/vagrant.html
 
 *You should be connected to your ec2 instance*
 
+# Setup VNCserver to get GUI
+* get script "ec2vncsetup.sh"
+* send it to the ec2 instance:
+```
+scp -i ~/.ssh/yourpemfile.pem ec2vncsetup.sh ubuntu@ec2-54-213-234-237.us-west-2.compute.amazonaws.com:~/ec2vncsetup.sh
+```
+* run it ```./ec2vncsetup.sh```
+* You need to accept prompts and enter a password at some point!
+* In AWS console, click on the instance and get the public IP address (something like 54.213.234.237)
+* Download VNCviewer on you local machine
+* When running VNCviewer use 54.213.234.237::5901 - public IP::5901
+* this should connect to the instance via gui
+
 # Install Docker - AWS Ubuntu
-Install Docker
+*This can be done just with the ec2dockersetup.sh script**
+* Install Docker
 ```
 sudo apt-get install docker.io
 ```
-Add docker user group with root access, if it doesn't yet exist. Then add your current user to that group. (you can find your user name by typing ```whoami``` in the command line)
+* Add docker user group with root access, if it doesn't yet exist. Then add your current user to that group. (you can find your user name by typing ```whoami``` in the command line)
 ```
 sudo groupadd docker
 sudo usermod -aG docker $YOURUSERNAME
 ```
-Test your docker installation
+* Log out of shell and log back in. type ```exit``` and ssh back into the instance
+* Test your docker installation
 ```
 docker run hello-world
 ```
