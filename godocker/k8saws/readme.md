@@ -80,6 +80,32 @@ Default output format [None]: json (or text or wtv you want)
 ```
 4. check if you have successfully configures your instance by typing ```cat ~/.aws/config```
 
+### Setup Kubectl
+add k8s variable to bash profile 
+```
+sudo vi ~/.profile
+
+export KUBERNETES_PROVIDER=aws # use the AWS specific scripts
+export KUBE_AWS_ZONE=eu-west-1c # choose your region, the default is us-west-2
+export NUM_NODES=3 # choose the number of nodes you want  
+export MASTER_SIZE=m3.large
+export NODE_SIZE=m3.xlarge
+export KUBE_ENABLE_INSECURE_REGISTRY=true # required to set the insecure registry flag on each node so we can push images to the cluster docker registry
+```
+Get Kubernetes with default AWS
+```
+export KUBERNETES_PROVIDER=aws; wget -q -O - https://get.k8s.io | bash
+```
+move the kubectl to user/local/bin
+```
+cd kubernetes
+sudo mv kubectl /usr/local/bin
+```
+Run setup script
+```
+bash cluster/kube-up.sh
+```
+
 ### Install go
 1. Install the latest version of golang :D
 ```

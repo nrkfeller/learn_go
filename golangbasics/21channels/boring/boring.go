@@ -1,10 +1,6 @@
 package main
 
-import (
-	"fmt"
-	"math/rand"
-	"time"
-)
+import "fmt"
 
 func main() {
 	c := fanIn(boring("Samy"), boring("Nick"), boring("Toms"), boring("Paul"))
@@ -19,7 +15,6 @@ func boring(msg string) <-chan string {
 	go func() {
 		for i := 0; ; i++ {
 			c <- fmt.Sprintf("%s %d", msg, i)
-			time.Sleep(time.Duration(rand.Intn(1e3)) * time.Millisecond)
 		}
 	}()
 	return c
