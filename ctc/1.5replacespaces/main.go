@@ -8,7 +8,23 @@ func main() {
 }
 
 func replacespace(a string) string {
-	ba := []byte(a)
+	count := 0
+
+	for _, v := range a {
+		if v == 32 {
+			count++
+		}
+	}
+
+	ba := make([]byte, len(a)+count*2)
+
+	for k := range a {
+		if a[k] == 32 {
+			ba = append(ba, []byte("%20")...)
+		} else {
+			ba = append(ba, a[k])
+		}
+	}
 
 	return string(ba)
 }
