@@ -6,6 +6,9 @@
   <title>Hello World</title>
   </head>
   <body>
-  <h1>nick feller</h1>
+    {{$mathiens := .}}
+    {{range $m := $mathiens}}
+  <h1>{{$m.Name}} INVENTED {{$m.Invented}}</h1>
+    {{end}}
   </body>
   </html>

@@ -6,6 +6,9 @@
   <title>Hello World</title>
   </head>
   <body>
-  <h1>nick feller</h1>
+    {{$m1 := .}}
+    {{range $key, $value := $m1}}
+  <h1>{{$key}}-{{$value}}</h1>
+    {{end}}
   </body>
   </html>
